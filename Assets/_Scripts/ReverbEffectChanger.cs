@@ -10,10 +10,12 @@ public class ReverbEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 	GameObject cam;
 
 	void Start () {
+
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		cam = GameObject.Find ("ARCamera");
 		effect = cam.GetComponent<AudioReverbFilter> ();
 		btnPress = false;
+
 	}
 
 	void Update () {

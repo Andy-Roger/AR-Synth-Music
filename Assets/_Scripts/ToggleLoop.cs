@@ -12,6 +12,7 @@ public class ToggleLoop : MonoBehaviour, IVirtualButtonEventHandler {
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		cam = GameObject.Find ("ARCamera");
 		delay = cam.GetComponent<AudioEchoFilter> ();
+		delay.decayRatio = 1;
 
 		if (delay.decayRatio <= 0.7f) {
 			delay.decayRatio = 1;
