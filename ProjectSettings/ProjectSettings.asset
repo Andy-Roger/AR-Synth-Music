@@ -478,11 +478,11 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Build: 0
-    Collab: 0
+    Collab: 1
     ErrorHub: 0
     Hub: 0
     UNet: 1
-  cloudProjectId: 3000fc21-adb3-40cf-9a23-ec60b6a4c526
-  projectName: AR Synth Music
-  organizationId: andyrogerkats
+  cloudProjectId: a8e03562-4e57-40ad-843d-4cf59057ba79
+  projectName: AR Synth Music (1)
+  organizationId: hotmax
   cloudEnabled: 0
