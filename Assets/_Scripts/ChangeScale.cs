@@ -17,14 +17,13 @@ public class ChangeScale : MonoBehaviour, IVirtualButtonEventHandler {
 		scaleTypes[3] = "pentatonic";
 		scaleTypes[4] = "whole tone";
 
+		// set activeScale on every button
 		foreach (GameObject btn in GameObject.FindGameObjectsWithTag("key")) {
 			btn.GetComponent<PlaySound>().activeScale = scaleTypes[0];
 		}
 
-		foreach(GameObject scaleName in GameObject.FindGameObjectsWithTag("soundText2"))
-		{
-			scaleName.GetComponent<TextMesh>().text = "SCALE:    " + scaleTypes[0].ToUpper();
-		}
+		// sets text on screen
+		GameObject.FindGameObjectWithTag("soundText2").GetComponent<TextMesh>().text = "SCALE:    " + scaleTypes[0].ToUpper();
 	}
 
 	public void OnButtonPressed (VirtualButtonAbstractBehaviour vb){
@@ -33,11 +32,10 @@ public class ChangeScale : MonoBehaviour, IVirtualButtonEventHandler {
 		if (i == scaleTypes.Length){ i = 0; }
 		foreach (GameObject btn in GameObject.FindGameObjectsWithTag("key")) {
 			btn.GetComponent<PlaySound>().activeScale = scaleTypes[i];
-			foreach(GameObject scaleName in GameObject.FindGameObjectsWithTag("soundText2"))
-			{
-				scaleName.GetComponent<TextMesh>().text = "SCALE:    " + scaleTypes[i].ToUpper();
-			}
 		}
+
+		// sets text on screen
+		GameObject.FindGameObjectWithTag("soundText2").GetComponent<TextMesh>().text = "SCALE:    " + scaleTypes[i].ToUpper();
 	}
 
 	public void OnButtonReleased (VirtualButtonAbstractBehaviour vb){}

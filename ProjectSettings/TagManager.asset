@@ -24,6 +24,7 @@ TagManager:
   - visuals1
   - rotate
   - visbox
+  - Visualizer
   layers:
   - Default
   - TransparentFX

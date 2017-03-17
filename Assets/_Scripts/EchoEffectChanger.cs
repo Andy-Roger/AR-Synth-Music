@@ -17,14 +17,22 @@ public class EchoEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 	}
 
 	void Update () {
-
+		if (effect.delay >= 5000) {
+			effect.delay = 0;
+		};
+		if (effect.delay < 500) {
+			effect.enabled = false;
+		} else {
+			effect.enabled = true;
+		}
+			
 		if (btnPress == true) {
-			foreach (GameObject effectDial in GameObject.FindGameObjectsWithTag("echoDial"))
-			{
-				effectDial.transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
-				effect.delay = effectDial.transform.rotation.eulerAngles.z * 20;
-			}
-		} 
+			effect.delay += 15;
+
+			// updates ui
+			GameObject.FindGameObjectWithTag("echoDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
+		}
+
 	}
 
 	public void OnButtonPressed(VirtualButtonAbstractBehaviour vb) {

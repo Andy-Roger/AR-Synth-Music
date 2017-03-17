@@ -12,12 +12,14 @@ public class PlaySound : MonoBehaviour, IVirtualButtonEventHandler {
 	public float bluesSteps;
 	public float pentatonicSteps;
 	public float wholeToneSteps;
+	public float pitchMultiplier;
 
 	void Start () {
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		source = soundSource.GetComponent<AudioSource> ();
 		source.clip = Resources.Load ("Demung") as AudioClip;
 		source.volume = .4f;
+		pitchMultiplier = 1.059463094359f;
 	}
 
 	public void OnButtonPressed (VirtualButtonAbstractBehaviour vb){
@@ -30,21 +32,28 @@ public class PlaySound : MonoBehaviour, IVirtualButtonEventHandler {
 	}
 
 	void Update(){
-		
-		if (activeScale == "major") {
-			source.pitch = Mathf.Pow (1.059463094359f, majorSteps);
-		}
-		if (activeScale == "minor") {
-			source.pitch = Mathf.Pow (1.059463094359f, minorSteps);
-		}
-		if (activeScale == "blues") {
-			source.pitch = Mathf.Pow (1.059463094359f, bluesSteps);
-		}
-		if (activeScale == "pentatonic") {
-			source.pitch = Mathf.Pow (1.059463094359f, pentatonicSteps);
-		}
-		if (activeScale == "whole tone") {
-			source.pitch = Mathf.Pow (1.059463094359f, wholeToneSteps);
-		}
+
+		switch (activeScale)  
+		{  
+		case "major":  
+			source.pitch = Mathf.Pow (pitchMultiplier, majorSteps);
+			break;
+		case "minor":  
+			source.pitch = Mathf.Pow (pitchMultiplier, minorSteps);  
+			break;  
+		case "blues":  
+			source.pitch = Mathf.Pow (pitchMultiplier, bluesSteps); 
+			break;
+		case "pentatonic":  
+			source.pitch = Mathf.Pow (pitchMultiplier, pentatonicSteps);  
+			break;
+		case "whole tone":  
+			source.pitch = Mathf.Pow (pitchMultiplier, wholeToneSteps);  
+			break;
+		default:  
+			source.pitch = Mathf.Pow (pitchMultiplier, majorSteps);  
+			break;  
+		}  
+
 	}
 }
