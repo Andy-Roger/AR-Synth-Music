@@ -7,24 +7,17 @@ public class ToggleLoop : MonoBehaviour, IVirtualButtonEventHandler {
 
 	AudioEchoFilter delay;
 	GameObject cam;
+	private bool looperIsOn;
 
 	void Start () {
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		cam = GameObject.Find ("ARCamera");
 		delay = cam.GetComponent<AudioEchoFilter> ();
-		delay.decayRatio = 1;
+		delay.decayRatio = .5f;
+		looperIsOn = false;
 
-		if (delay.decayRatio <= 0.7f) {
-			delay.decayRatio = 1;
-			foreach(GameObject loopText in GameObject.FindGameObjectsWithTag("soundText3")){
-				loopText.GetComponent<TextMesh>().text = "LOOPER:    ON";
-			}
-		}else{
-			delay.decayRatio = .5f;
-			foreach(GameObject loopText in GameObject.FindGameObjectsWithTag("soundText3")){
-				loopText.GetComponent<TextMesh>().text = "LOOPER:    OFF";
-			}
-		}
+		//set ui
+		GameObject.FindGameObjectWithTag("soundText3").GetComponent<TextMesh>().text = "LOOPER:    OFF";
 	}
 
 	void Update () {
@@ -32,16 +25,16 @@ public class ToggleLoop : MonoBehaviour, IVirtualButtonEventHandler {
 	}
 
 	public void OnButtonPressed(VirtualButtonAbstractBehaviour vb) {
-		if (delay.decayRatio <= 0.7f) {
+		looperIsOn = !looperIsOn;
+
+		if (looperIsOn) {
 			delay.decayRatio = 1;
-			foreach(GameObject loopText in GameObject.FindGameObjectsWithTag("soundText3")){
-				loopText.GetComponent<TextMesh>().text = "LOOPER:    ON";
-				}
+			//set ui
+			GameObject.FindGameObjectWithTag("soundText3").GetComponent<TextMesh>().text = "LOOPER:    ON";
 		}else{
 			delay.decayRatio = .5f;
-			foreach(GameObject loopText in GameObject.FindGameObjectsWithTag("soundText3")){
-				loopText.GetComponent<TextMesh>().text = "LOOPER:    OFF";
-			}
+			//set ui
+			GameObject.FindGameObjectWithTag("soundText3").GetComponent<TextMesh>().text = "LOOPER:    OFF";
 		}
 	}
 

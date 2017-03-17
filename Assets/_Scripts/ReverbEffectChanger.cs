@@ -10,7 +10,6 @@ public class ReverbEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 	GameObject cam;
 
 	void Start () {
-
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		cam = GameObject.Find ("ARCamera");
 		effect = cam.GetComponent<AudioReverbFilter> ();
@@ -20,13 +19,22 @@ public class ReverbEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 
 	void Update () {
 
+		if (effect.decayTime >= 20) {
+			effect.decayTime = 0;
+		};
+		if (effect.decayTime < 2) {
+			effect.enabled = false;
+		} else {
+			effect.enabled = true;
+		}
+
 		if (btnPress == true) {
-			foreach (GameObject effectDial in GameObject.FindGameObjectsWithTag("reverbDial"))
-			{
-				effectDial.transform.Rotate (Vector3.forward * 80 * Time.deltaTime); 
-				effect.decayTime = effectDial.transform.rotation.eulerAngles.z / 17;
-			}
-		} 
+			effect.decayTime += .05f;
+
+			// updates ui
+			GameObject.FindGameObjectWithTag("reverbDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
+		}
+
 	}
 
 	public void OnButtonPressed(VirtualButtonAbstractBehaviour vb) {

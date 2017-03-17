@@ -17,15 +17,23 @@ public class ChorusEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 	}
 
 	void Update () {
+		
+		if (effect.rate >= 20) {
+			effect.rate = 0;
+		};
+		if (effect.rate < 2) {
+			effect.enabled = false;
+		} else {
+			effect.enabled = true;
+		}
 
 		if (btnPress == true) {
-			
-			foreach (GameObject effectDial in GameObject.FindGameObjectsWithTag("chorusDial"))
-			{
-				effectDial.transform.Rotate (Vector3.forward * 80 * Time.deltaTime); 
-				effect.rate = effectDial.transform.rotation.eulerAngles.z / 17;
-			}
-		} 
+			effect.rate += .05f;
+
+			// updates ui
+			GameObject.FindGameObjectWithTag("chorusDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
+		}
+
 	}
 
 	public void OnButtonPressed(VirtualButtonAbstractBehaviour vb) {
