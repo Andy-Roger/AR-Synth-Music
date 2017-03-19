@@ -25,6 +25,9 @@ TagManager:
   - rotate
   - visbox
   - Visualizer
+  - visualizerCubes
+  - changeSound
+  - noteText
   layers:
   - Default
   - TransparentFX
