@@ -18,7 +18,7 @@ public class PlaySound : MonoBehaviour, IVirtualButtonEventHandler {
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		source = soundSource.GetComponent<AudioSource> ();
 		source.clip = Resources.Load ("Demung") as AudioClip;
-		source.volume = .4f;
+		source.volume = .5f;
 		pitchMultiplier = 1.059463094359f;
 	}
 
