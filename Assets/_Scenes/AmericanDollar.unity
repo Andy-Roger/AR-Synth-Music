@@ -2031,6 +2031,7 @@ GameObject:
   - component: {fileID: 576268473}
   - component: {fileID: 576268472}
   - component: {fileID: 576268474}
+  - component: {fileID: 576268471}
   m_Layer: 0
   m_Name: ComputerContainer
   m_TagString: Untagged
@@ -2059,6 +2060,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &576268471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 576268469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a917f0af64a6423093132dab321c15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  computer: {fileID: 0}
+  visualizer: {fileID: 0}
 --- !u!65 &576268472
 BoxCollider:
   m_ObjectHideFlags: 0
