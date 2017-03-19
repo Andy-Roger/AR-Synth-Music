@@ -28,6 +28,9 @@ TagManager:
   - visualizerCubes
   - changeSound
   - noteText
+  - eyes
+  - mouth
+  - bill
   layers:
   - Default
   - TransparentFX
