@@ -11,7 +11,7 @@ public class buddySpeech : MonoBehaviour {
 	Dictionary<string, string> helloCollection;
 
 	void Start () {
-		showSpeechBubble = false;
+		showSpeechBubble = true;
 		helloCollection = new Dictionary<string, string> ();
 	
 		helloCollection.Add ("Usa", "hello");
@@ -27,13 +27,13 @@ public class buddySpeech : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (showSpeechBubble) {
-			gameObject.GetComponent<Canvas> ().enabled = true;
-			// get scene and use it as helloCollection key
-			speechText.text = helloCollection["Japan"];
-
-		} else {
-			gameObject.GetComponent<Canvas> ().enabled = false;
-		}
+//		if (showSpeechBubble) {
+//			gameObject.GetComponent<Canvas> ().enabled = true;
+//			// get scene and use it as helloCollection key
+//			speechText.text = helloCollection["Japan"];
+//
+//		} else {
+//			gameObject.GetComponent<Canvas> ().enabled = false;
+//		}
 	}
 }
