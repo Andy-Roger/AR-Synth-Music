@@ -16,7 +16,6 @@ public class visualizeEffects : MonoBehaviour {
 		chorus 	= cam.GetComponent<AudioChorusFilter> ();
 	}
 
-
 	void Update () {
 
 		// add reverb effect to visualizer

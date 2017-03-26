@@ -31,6 +31,8 @@ TagManager:
   - eyes
   - mouth
   - bill
+  - sphereVisualObjs
+  - sphereHolder
   layers:
   - Default
   - TransparentFX
