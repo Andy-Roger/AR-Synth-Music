@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 65761170387239220}
   - component: {fileID: 23653778554772798}
   - component: {fileID: 95432557908623486}
-  - component: {fileID: 114607713602718826}
   m_Layer: 0
   m_Name: vis1
   m_TagString: visualizerCubes
@@ -111,15 +110,3 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114607713602718826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066079396133062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab55358cbe9e8a141b1d199eeb0b4842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
