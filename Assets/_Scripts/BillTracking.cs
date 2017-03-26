@@ -28,11 +28,44 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 		{
 			directionsBg.GetComponent<Animator>().SetBool("tracked", true);
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", true);
+
+			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
+			Collider[] colliderComponents = littleBuddy.GetComponentsInChildren<Collider>(true);
+
+			foreach (Renderer component in rendererComponents)
+			{
+				component.enabled = true;
+
+			}
+
+			// Enable colliders:
+			foreach (Collider component in colliderComponents)
+			{
+				component.enabled = true;
+			}
+
+
 		}
 		else
 		{
 			Invoke ("fadeOnBillTracked", 2);
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", false);
+
+			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
+			Collider[] colliderComponents = littleBuddy.GetComponentsInChildren<Collider>(true);
+
+			// Disable rendering:
+			foreach (Renderer component in rendererComponents)
+			{
+				component.enabled = false;
+			}
+
+			// Disable colliders:
+			foreach (Collider component in colliderComponents)
+			{
+				component.enabled = false;
+			}
+
 		}
 	}
 
