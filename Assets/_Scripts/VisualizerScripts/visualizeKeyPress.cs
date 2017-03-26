@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class visualizeKeyPress : MonoBehaviour {
 
-	public GameObject prefab;
-	public Transform visContainer;
 	float i;
+	Vector3[] axies = new Vector3[3];
+	int index;
 
 	void Start () {
-		makeVis1 ();
+		axies [0] = Vector3.up;
+		axies [1] = Vector3.forward;
+		axies [2] = Vector3.down;
 	}
 	
 	void Update () {
@@ -18,26 +20,26 @@ public class visualizeKeyPress : MonoBehaviour {
 		foreach (GameObject key in GameObject.FindGameObjectsWithTag("key")) {
 			if ( key.GetComponent<BasicButtonBehavior>().buttonIsPressed ) {
 				StartCoroutine(doVisuals ());
+				index = Random.Range (0, axies.Length);
 			}
 		}
+		changeSpheresDirection ();
 	}
 
 	IEnumerator doVisuals(){
 		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
-			cube.GetComponent<Animator> ().SetTrigger ("AttackTrigger");
-			yield return new WaitForSeconds (0.0001f);
+			if (cube != null) {
+				cube.GetComponent<Animator> ().SetTrigger ("AttackTrigger");
+				yield return new WaitForSeconds (0.0001f);
+			}
 		}
 	}
 
-	void makeVis1(){
-		for (i = 0; i < 121; i++) {
-			Object.Instantiate (prefab,visContainer);
-		}
-
-		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
-			cube.transform.localPosition = new Vector3 (0,0,0);
-			cube.transform.rotation = new Quaternion (Random.Range (180,-180), Random.Range (180,-180), Random.Range (180,-180), 1);
-			cube.GetComponent<Renderer> ().material.color = new Color (Random.value, Random.value, Random.value, 0.1f);
+	void changeSpheresDirection(){
+		if (GameObject.FindGameObjectWithTag ("sphereHolder") != null) {
+			foreach (GameObject points in GameObject.FindGameObjectsWithTag ("sphereVisualObjs")) {
+				points.transform.RotateAround (points.transform.parent.position, axies[index], 100 * Time.deltaTime);
+			}
 		}
 	}
 }
