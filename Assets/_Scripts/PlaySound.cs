@@ -17,7 +17,7 @@ public class PlaySound : MonoBehaviour, IVirtualButtonEventHandler {
 	void Start () {
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		source = soundSource.GetComponent<AudioSource> ();
-		source.clip = Resources.Load ("triangle") as AudioClip;
+		source.clip = Resources.Load ("fuzz") as AudioClip;
 		source.volume = .5f;
 		pitchMultiplier = 1.059463094359f;
 	}
