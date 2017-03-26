@@ -9,13 +9,10 @@ public class visualizeSounds : MonoBehaviour {
 	GameObject changeSoundBtn;
 	string soundName;
 	string privateName;
-	public Mesh mesh3;
+	public Mesh mesh;
 	public GameObject prefab;
 	public Transform visContainer;
-
 	public int numberOfPoints = 40;
-	Vector3[] axies = new Vector3[3];
-	int index;
 
 	void Start () {
 		cam 	= GameObject.Find ("Sound1");
@@ -34,7 +31,7 @@ public class visualizeSounds : MonoBehaviour {
 
 	void rotatingBarsVisual(){
 		foreach (GameObject visualObjs in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
-			visualObjs.GetComponent<MeshFilter> ().mesh = mesh3;
+			visualObjs.GetComponent<MeshFilter> ().mesh = mesh;
 			visualObjs.transform.localPosition = new Vector3 (0, 0, 0);
 			visualObjs.transform.localRotation = new Quaternion (Random.Range(1,360),Random.Range(1,360),Random.Range(1,360),1);
 		}
