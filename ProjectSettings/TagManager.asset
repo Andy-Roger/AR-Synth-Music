@@ -33,6 +33,7 @@ TagManager:
   - bill
   - sphereVisualObjs
   - sphereHolder
+  - notebtn
   layers:
   - Default
   - TransparentFX
