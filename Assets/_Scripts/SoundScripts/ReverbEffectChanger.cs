@@ -30,9 +30,6 @@ public class ReverbEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 
 		if (btnPress == true) {
 			effect.decayTime += .05f;
-
-			// updates ui
-			GameObject.FindGameObjectWithTag("reverbDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
 		}
 
 	}

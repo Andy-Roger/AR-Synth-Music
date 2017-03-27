@@ -30,8 +30,6 @@ public class ChorusEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 		if (btnPress == true) {
 			effect.rate += .05f;
 
-			// updates ui
-			GameObject.FindGameObjectWithTag("chorusDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
 		}
 
 	}
