@@ -6,7 +6,6 @@ using Vuforia;
 public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 
 	private TrackableBehaviour mTrackableBehaviour;
-	public GameObject directionsBg;
 	public GameObject littleBuddy;
 
 
@@ -20,22 +19,23 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 			
 	}
 
+	// tracks if a bill is detected. All stuff that happens on detection or lost goes here
+
 	public void OnTrackableStateChanged( TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status newStatus)
 	{
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 		    newStatus == TrackableBehaviour.Status.TRACKED ||
 		    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED) 
 		{
-			directionsBg.GetComponent<Animator>().SetBool("tracked", true);
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", true);
 
 			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
 			Collider[] colliderComponents = littleBuddy.GetComponentsInChildren<Collider>(true);
 
+			// Enable Renderers
 			foreach (Renderer component in rendererComponents)
 			{
 				component.enabled = true;
-
 			}
 
 			// Enable colliders:
@@ -44,11 +44,13 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 				component.enabled = true;
 			}
 
+			StartCoroutine(doButtonJump ());
+
+			Invoke ("fadeInVisualizer", 1);
 
 		}
 		else
 		{
-			Invoke ("fadeOnBillTracked", 2);
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", false);
 
 			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
@@ -65,11 +67,25 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 			{
 				component.enabled = false;
 			}
-
 		}
 	}
 
-	void fadeOnBillTracked(){
-		directionsBg.GetComponent<Animator>().SetBool("tracked", false);
+
+	// activates the buttons animator to jump in sequence
+	IEnumerator doButtonJump(){
+		foreach (GameObject notebtn in GameObject.FindGameObjectsWithTag("notebtn")) {
+			if (notebtn != null) {
+				notebtn.GetComponent<Animator> ().SetTrigger ("buttonJump");
+				yield return new WaitForSeconds (0.01f);
+			}
+		}
+	}
+
+	void fadeInVisualizer(){
+		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
+			if (cube != null) {
+				cube.GetComponent<Renderer> ().material.color = new Color(.1f,.1f,.1f,.1f);
+			}
+		}
 	}
 }
