@@ -61,6 +61,8 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 
 			fadeInVis ();
 
+
+
 		}
 
 		// bill is lost 
@@ -72,7 +74,6 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", false);
 			trackingScreen.GetComponent<Animator>().SetBool("tracked", false);
-
 
 			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
 			Collider[] colliderComponents = littleBuddy.GetComponentsInChildren<Collider>(true);
@@ -114,6 +115,7 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
 			if (cube != null) {
 				cube.GetComponent<Animator> ().SetTrigger ("tracked");
+//				cube.GetComponent<Renderer> ().material.shader = Shader.Find("Standard");
 			}
 		}
 	}
