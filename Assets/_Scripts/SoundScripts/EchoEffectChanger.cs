@@ -29,8 +29,6 @@ public class EchoEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 		if (btnPress == true) {
 			effect.delay += 15;
 
-			// updates ui
-			GameObject.FindGameObjectWithTag("echoDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
 		}
 
 	}

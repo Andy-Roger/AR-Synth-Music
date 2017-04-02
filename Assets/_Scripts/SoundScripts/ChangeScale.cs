@@ -21,9 +21,7 @@ public class ChangeScale : MonoBehaviour, IVirtualButtonEventHandler {
 		foreach (GameObject btn in GameObject.FindGameObjectsWithTag("key")) {
 			btn.GetComponent<PlaySound>().activeScale = scaleTypes[0];
 		}
-
-		// sets text on screen
-		GameObject.FindGameObjectWithTag("soundText2").GetComponent<TextMesh>().text = "SCALE:    " + scaleTypes[0].ToUpper();
+			
 	}
 
 	public void OnButtonPressed (VirtualButtonAbstractBehaviour vb){
@@ -33,9 +31,7 @@ public class ChangeScale : MonoBehaviour, IVirtualButtonEventHandler {
 		foreach (GameObject btn in GameObject.FindGameObjectsWithTag("key")) {
 			btn.GetComponent<PlaySound>().activeScale = scaleTypes[i];
 		}
-
-		// sets text on screen
-		GameObject.FindGameObjectWithTag("soundText2").GetComponent<TextMesh>().text = "SCALE:    " + scaleTypes[i].ToUpper();
+			
 	}
 
 	public void OnButtonReleased (VirtualButtonAbstractBehaviour vb){}

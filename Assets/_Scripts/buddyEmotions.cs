@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class buddyEmotions : MonoBehaviour {
 
 	public string emotion;
+	public string screenState;
+
+	public GameObject faceScreen;
+	public GameObject infoScreen;
+
 	public Canvas speechBubble;
 
 	public GameObject eyes;
@@ -20,6 +25,10 @@ public class buddyEmotions : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		makeEmotion ("neutral");
+
+		screenState = "face";
+		faceScreen.SetActive (true);
+		infoScreen.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -35,6 +44,11 @@ public class buddyEmotions : MonoBehaviour {
 		}
 		if (Input.GetKeyUp(KeyCode.D)) {
 			makeEmotion ("speaking");
+		}
+
+		//switch screen trigger -- will be tied to the effect changes
+		if (Input.GetKeyUp(KeyCode.Space)) {
+			switchScreen ();
 		}
 	}
 
@@ -79,6 +93,22 @@ public class buddyEmotions : MonoBehaviour {
 
 	void blink () {
 		eyes.GetComponent<Animator>().SetTrigger("Blink");
+	}
+
+	void switchScreen () {
+		//this isn't a bool because we might have more screenstates in the future
+		//changes between face and soundInfo screen state
+		if (screenState == "face") {
+			screenState = "soundInfo";
+			faceScreen.SetActive (false);
+			infoScreen.SetActive (true);
+		} else {
+			screenState = "face";
+			faceScreen.SetActive (true);
+			infoScreen.SetActive (false);
+		}
+
+
 	}
 
 }

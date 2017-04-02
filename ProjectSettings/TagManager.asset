@@ -33,6 +33,7 @@ TagManager:
   - bill
   - sphereVisualObjs
   - sphereHolder
+  - trackingBackground
   layers:
   - Default
   - TransparentFX

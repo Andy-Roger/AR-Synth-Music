@@ -15,9 +15,6 @@ public class ToggleLoop : MonoBehaviour, IVirtualButtonEventHandler {
 		delay = cam.GetComponent<AudioEchoFilter> ();
 		delay.decayRatio = .5f;
 		looperIsOn = false;
-
-		//set ui
-		GameObject.FindGameObjectWithTag("soundText3").GetComponent<TextMesh>().text = "LOOPER:    OFF";
 	}
 
 	void Update () {
@@ -29,12 +26,8 @@ public class ToggleLoop : MonoBehaviour, IVirtualButtonEventHandler {
 
 		if (looperIsOn) {
 			delay.decayRatio = 1;
-			//set ui
-			GameObject.FindGameObjectWithTag("soundText3").GetComponent<TextMesh>().text = "LOOPER:    ON";
 		}else{
 			delay.decayRatio = .5f;
-			//set ui
-			GameObject.FindGameObjectWithTag("soundText3").GetComponent<TextMesh>().text = "LOOPER:    OFF";
 		}
 	}
 

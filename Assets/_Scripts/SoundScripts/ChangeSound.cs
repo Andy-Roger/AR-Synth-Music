@@ -40,8 +40,6 @@ public class ChangeSound : MonoBehaviour, IVirtualButtonEventHandler {
 		}
 
 		soundString = clips [iterator].name;
-
-		GameObject.FindGameObjectWithTag("soundText").GetComponent<TextMesh>().text = "SAMPLE:    " + clips[iterator].name.ToUpper();
 	}
 		
 	public void OnButtonReleased (VirtualButtonAbstractBehaviour vb){}
