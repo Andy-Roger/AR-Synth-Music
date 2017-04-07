@@ -1,75 +1,188 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ScreenSwitcher : MonoBehaviour {
 
-	string scale;
-	string previousScale;
-	public GameObject key1;
+	//start public Vars
+	public AudioEchoFilter echo;
+	public AudioChorusFilter chorus;
+	public AudioReverbFilter reverb;
 
-	string sample;
-	string previousSample;
-	public GameObject sampleBtn;
+	public ChangeSound sample;
+	public PlaySound scale;
 
-	public GameObject cam;
-	AudioReverbFilter reverb;
-	AudioEchoFilter echo;
-	AudioChorusFilter chorus;
+	float echoChange;
+	float reverbChange;
+	float chorusChange;
 
-	float decay;
-	float delay;
-	float rate;
+	string sampleChange;
+	string scaleChange;
 
-	float previousDecay;
-	float previousDelay;
-	float previousRate;
+//	public GameObject echoScreen;
+//	public GameObject chorusScreen;
+//	public GameObject reverbScreen;
+//	public GameObject scaleScreen;
+//	public GameObject sampleScreen;
+//	public GameObject faceScreen;
+
+	public Canvas echoScreen;
+	public Canvas chorusScreen;
+	public Canvas reverbScreen;
+	public Canvas scaleScreen;
+	public Canvas sampleScreen;
+	public Canvas faceScreen;
 
 	void start(){
-		
+
+		echoChange = echo.delay;
+		reverbChange = reverb.decayTime;
+		chorusChange = chorus.rate;   
+
+		sampleChange = sample.soundString;
+		scaleChange = scale.activeScale;
 	}
+
+
+//	void stringChangeWatcher(string current, string changeMemory) {
+//		if (changeMemory != current) {
+//
+//			Debug.Log(changeMemory + " " + current);
+//
+//
+//			changeMemory = current;
+//			// move script
+//
+//			Debug.Log(changeMemory + " " + current);
+//		}
+//	}
 
 	void Update () {
-		scaleScreenMove ();
-		sampleScreenMove ();
-		effectScreenMove ();
+
+//		floatChangeWatcher (current: echo.delay, changeMemory: echoChange);
+//		floatChangeWatcher (current: reverb.decayTime, changeMemory: reverbChange);
+//		floatChangeWatcher (current: chorus.rate, changeMemory: chorusChange);
+//
+//		stringChangeWatcher (current: sample.soundString, changeMemory: sampleChange);
+
+		echoChangeWatcher ();
+		chorusChangeWatcher ();
+		reverbChangeWatcher ();
+		scaleChangeWatcher ();
+		sampleChangeWatcher ();
+
 	}
 
-	// listens for scale being changed
+//	void floatChangeWatcher(float currentFloat, float changeMemoryFloat) {
+//		
+//		if (changeMemoryFloat != currentFloat) {
+//			changeMemoryFloat = currentFloat;
+//
+//			// move script
+//			Debug.Log(" float change");
+//		}
+//	}
 
-	void scaleScreenMove(){
-		scale = key1.GetComponent<PlaySound> ().activeScale;
-		if (previousScale != scale) {
-			previousScale = scale;
+	void echoChangeWatcher() {
+		if (echoChange != echo.delay) {
+			echoChange = echo.delay;
 
-			// move screen
+			// move script
 
+			CancelInvoke ("faceScreenChange");
+
+			echoScreen.enabled = true;
+			chorusScreen.enabled = false;
+			reverbScreen.enabled = false;
+			sampleScreen.enabled = false;
+			scaleScreen.enabled = false;
+			faceScreen.enabled = false;
+
+			Invoke ("faceScreenChange", 2);
 		}
 	}
 
-	// listens for sample being changed
+	void chorusChangeWatcher() {
+		if (chorusChange != chorus.rate) {
+			chorusChange = chorus.rate;
 
-	void sampleScreenMove(){
-		sample = sampleBtn.GetComponent<ChangeSound> ().soundString;
-		if (previousSample != sample) {
-			previousSample = sample;
+			// move script
 
-			// move screen
+			CancelInvoke ("faceScreenChange");
 
+			echoScreen.enabled = false;
+			chorusScreen.enabled = true;
+			reverbScreen.enabled = false;
+			sampleScreen.enabled = false;
+			scaleScreen.enabled = false;
+			faceScreen.enabled = false;
+
+			Invoke ("faceScreenChange", 2);
 		}
 	}
 
-	// listens for effects being changed
+	void reverbChangeWatcher() {
+		if (reverbChange != reverb.decayTime) {
+			reverbChange = reverb.decayTime;
 
-	void effectScreenMove(){
-		decay = cam.GetComponent<AudioReverbFilter> ().decayTime;
-		delay = cam.GetComponent<AudioEchoFilter> ().delay;
-		rate = cam.GetComponent<AudioChorusFilter> ().rate;
-		if(previousDecay != decay || previousDelay != delay || previousRate != rate){
-			previousDecay = decay;
-			previousDelay = delay;
-			previousRate = rate;
-			// move screen
+			// move script
+
+			CancelInvoke ("faceScreenChange");
+
+			echoScreen.enabled = false;
+			chorusScreen.enabled = false;
+			reverbScreen.enabled = true;
+			sampleScreen.enabled = false;
+			scaleScreen.enabled = false;
+			faceScreen.enabled = false;
+
+			Invoke ("faceScreenChange", 2);
 		}
+	}
+		
+	void scaleChangeWatcher() {
+		if (scaleChange != scale.activeScale) {
+			scaleChange = scale.activeScale;
+
+			// move script
+			CancelInvoke ("faceScreenChange");
+
+			echoScreen.enabled = false;
+			chorusScreen.enabled = false;
+			reverbScreen.enabled = false;
+			sampleScreen.enabled = false;
+			scaleScreen.enabled = true;
+			faceScreen.enabled = false;
+
+			Invoke ("faceScreenChange", 2);
+		}
+	}
+
+	void sampleChangeWatcher() {
+		if (sampleChange != sample.soundString) {
+			sampleChange = sample.soundString;
+
+			// move script
+			CancelInvoke ("faceScreenChange");
+
+			echoScreen.enabled = false;
+			chorusScreen.enabled = false;
+			reverbScreen.enabled = false;
+			sampleScreen.enabled = true;
+			scaleScreen.enabled = false;
+			faceScreen.enabled = false;
+
+			Invoke ("faceScreenChange", 2);
+		}
+	}
+
+	void faceScreenChange(){
+		echoScreen.enabled = false;
+		chorusScreen.enabled = false;
+		reverbScreen.enabled = false;
+		sampleScreen.enabled = false;
+		scaleScreen.enabled = false;
+		faceScreen.enabled = true;
 	}
 }

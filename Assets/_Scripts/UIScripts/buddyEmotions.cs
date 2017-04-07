@@ -14,7 +14,7 @@ public class buddyEmotions : MonoBehaviour {
 	public Canvas speechBubble;
 
 	public GameObject eyes;
-	public GameObject mouth;
+	public GameObject mouth;	
 
 	public Sprite baselineEyes;
 	public Sprite listeningEyes;
@@ -27,8 +27,8 @@ public class buddyEmotions : MonoBehaviour {
 		makeEmotion ("neutral");
 
 		screenState = "face";
-		faceScreen.SetActive (true);
-		infoScreen.SetActive (false);
+//		faceScreen.SetActive (true);
+//		infoScreen.SetActive (false);
 	}
 	
 	// Update is called once per frame

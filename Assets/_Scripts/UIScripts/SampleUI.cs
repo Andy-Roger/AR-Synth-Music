@@ -18,6 +18,7 @@ public class SampleUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		text.text = source.clip.name;	
+		text.text = source.clip.name;
+
 	}
 }

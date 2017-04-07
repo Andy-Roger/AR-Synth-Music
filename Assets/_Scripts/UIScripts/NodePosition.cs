@@ -57,7 +57,7 @@ public class NodePosition : MonoBehaviour {
 			nodesCollection [i].gameObject.GetComponent<LineRenderer> ().endWidth = 6f;
 			nodesCollection [i].gameObject.GetComponent<LineRenderer> ().material = new Material (Shader.Find ("Standard"));
 			nodesCollection [i].gameObject.GetComponent<LineRenderer> ().material.color = new Color(245, 0, 0, 255);
-			homePositions [i] = nodesCollection [i].transform.position;
+			homePositions [i] = nodesCollection [i].transform.localPosition;
 		}
 
 		//draw initial lines
@@ -148,7 +148,7 @@ public class NodePosition : MonoBehaviour {
 				}
 
 				if (active == true) {
-					nodesCollection [i].transform.position = homePositions [i];
+					nodesCollection [i].transform.localPosition = homePositions [i];
 					lastActivePosition = nodesCollection [i].transform.position;
 				}
 
