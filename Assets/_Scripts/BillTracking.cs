@@ -7,7 +7,8 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 
 	private TrackableBehaviour mTrackableBehaviour;
 	public GameObject littleBuddy;
-
+	public GameObject trackingScreen;
+	bool onTracked;
 
 	void Start()
 	{
@@ -16,21 +17,28 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 		{
 			mTrackableBehaviour.RegisterTrackableEventHandler(this);
 		}
-			
 	}
 
 	// tracks if a bill is detected. All stuff that happens on detection or lost goes here
 
 	public void OnTrackableStateChanged( TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status newStatus)
 	{
+
+		// bill is detected 
+
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 		    newStatus == TrackableBehaviour.Status.TRACKED ||
 		    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED) 
 		{
+
+			onTracked = true;
+
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", true);
+			trackingScreen.GetComponent<Animator>().SetBool("tracked", true);
 
 			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
 			Collider[] colliderComponents = littleBuddy.GetComponentsInChildren<Collider>(true);
+			Canvas[] canvasComponents = littleBuddy.GetComponentsInChildren<Canvas>(true);
 
 			// Enable Renderers
 			foreach (Renderer component in rendererComponents)
@@ -44,17 +52,32 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 				component.enabled = true;
 			}
 
+			foreach (Canvas component in canvasComponents)
+			{
+				component.enabled = true;
+			}
+
 			StartCoroutine(doButtonJump ());
 
-			Invoke ("fadeInVisualizer", 1);
+			fadeInVis ();
+
+
 
 		}
+
+		// bill is lost 
+
 		else
 		{
+
+			onTracked = false;
+
 			littleBuddy.GetComponent<Animator>().SetBool("tracked", false);
+			trackingScreen.GetComponent<Animator>().SetBool("tracked", false);
 
 			Renderer[] rendererComponents = littleBuddy.GetComponentsInChildren<Renderer>(true);
 			Collider[] colliderComponents = littleBuddy.GetComponentsInChildren<Collider>(true);
+			Canvas[] canvasComponents = littleBuddy.GetComponentsInChildren<Canvas>(true);
 
 			// Disable rendering:
 			foreach (Renderer component in rendererComponents)
@@ -67,6 +90,13 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 			{
 				component.enabled = false;
 			}
+
+			foreach (Canvas component in canvasComponents)
+			{
+				component.enabled = false;
+			}
+
+			setVisAnimIdle ();
 		}
 	}
 
@@ -76,15 +106,25 @@ public class BillTracking : MonoBehaviour, ITrackableEventHandler {
 		foreach (GameObject notebtn in GameObject.FindGameObjectsWithTag("notebtn")) {
 			if (notebtn != null) {
 				notebtn.GetComponent<Animator> ().SetTrigger ("buttonJump");
-				yield return new WaitForSeconds (0.01f);
+				yield return new WaitForSeconds (0.1f);
 			}
 		}
 	}
 
-	void fadeInVisualizer(){
+	void fadeInVis(){
 		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
 			if (cube != null) {
-				cube.GetComponent<Renderer> ().material.color = new Color(.1f,.1f,.1f,.1f);
+				cube.GetComponent<Animator> ().SetTrigger ("tracked");
+//				cube.GetComponent<Renderer> ().material.shader = Shader.Find("Standard");
+			}
+		}
+	}
+
+	// if tracking stops and animation clip is playing go back to idle state
+	void setVisAnimIdle(){
+		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("visualizerCubes")) {
+			if (cube != null) {
+				cube.GetComponent<Animator> ().Play("Idle");
 			}
 		}
 	}

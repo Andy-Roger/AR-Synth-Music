@@ -25,7 +25,7 @@ public class ChangeSound : MonoBehaviour, IVirtualButtonEventHandler {
 		clips[0] = Resources.Load ("fuzz") as AudioClip;
 		clips[1] = Resources.Load ("glass pad") as AudioClip;
 		clips[2] = Resources.Load ("arpeggio") as AudioClip;
-		clips[3] = Resources.Load ("derp") as AudioClip;
+		clips[3] = Resources.Load ("triangle") as AudioClip;
 		clips[4] = Resources.Load ("viola") as AudioClip;
 		clips[5] = Resources.Load ("derp") as AudioClip;
 	}

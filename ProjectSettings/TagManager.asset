@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - soundText
   - echoSlider
   - reverbSlider
   - chorusSlider
@@ -12,9 +11,7 @@ TagManager:
   - echoDial
   - reverbDial
   - key
-  - soundText2
   - looperBtn
-  - soundText3
   - cubes
   - base
   - computer
@@ -34,6 +31,17 @@ TagManager:
   - sphereVisualObjs
   - sphereHolder
   - notebtn
+  - sampleText
+  - clip
+  - scaleText
+  - cam
+  - sample1
+  - sample2
+  - sample3
+  - sample4
+  - sample5
+  - sample6
+  - changeScale
   layers:
   - Default
   - TransparentFX

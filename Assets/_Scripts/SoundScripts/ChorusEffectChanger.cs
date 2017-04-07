@@ -3,36 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class ReverbEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
+public class ChorusEffectChanger : MonoBehaviour, IVirtualButtonEventHandler {
 
-	AudioReverbFilter effect;
+	AudioChorusFilter effect;
 	public bool btnPress;
 	GameObject cam;
 
 	void Start () {
 		gameObject.GetComponent<VirtualButtonBehaviour> ().RegisterEventHandler (this);
 		cam = GameObject.Find ("ARCamera");
-		effect = cam.GetComponent<AudioReverbFilter> ();
+		effect = cam.GetComponent<AudioChorusFilter> ();
 		btnPress = false;
-
 	}
 
 	void Update () {
-
-		if (effect.decayTime >= 20) {
-			effect.decayTime = 0;
+		
+		if (effect.rate >= 20) {
+			effect.rate = 0;
 		};
-		if (effect.decayTime < 2) {
+		if (effect.rate < 2) {
 			effect.enabled = false;
 		} else {
 			effect.enabled = true;
 		}
 
 		if (btnPress == true) {
-			effect.decayTime += .05f;
+			effect.rate += .05f;
 
-			// updates ui
-			GameObject.FindGameObjectWithTag("reverbDial").transform.Rotate (Vector3.forward * 80 * Time.deltaTime, Space.Self); 
 		}
 
 	}

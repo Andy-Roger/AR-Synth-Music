@@ -13,12 +13,12 @@ public class ClickSounds : MonoBehaviour, IVirtualButtonEventHandler {
 	}
 
 	public void OnButtonPressed (VirtualButtonAbstractBehaviour vb){
-		audioS.pitch = 1;
+		audioS.pitch = Random.Range(.95f, 1.05f);
 		audioS.Play();
 	}
 
 	public void OnButtonReleased (VirtualButtonAbstractBehaviour vb){
-		audioS.pitch = .8f;
+		audioS.pitch = Random.Range(.75f, .85f);
 		audioS.Play();
 	}
 }
